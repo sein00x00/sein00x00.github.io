@@ -9,6 +9,289 @@
 
 
 
+// Класс для управления корзиной
+class CartManager {
+    constructor() {
+        this.cart = JSON.parse(localStorage.getItem('cart')) || {};
+        this.initEventListeners();
+        this.updateAllCounters();
+    }
+    
+    // Генерируем уникальный ID для товара
+    generateItemId(name, size = null) {
+        return `${name}_${size || 'no-size'}`;
+    }
+    
+    // Добавляем товар в корзину
+    addToCart(name, price, size = null) {
+        const itemId = this.generateItemId(name, size);
+        
+        if (this.cart[itemId]) {
+            this.cart[itemId].quantity += 1;
+        } else {
+            this.cart[itemId] = {
+                name: name,
+                price: parseInt(price.replace(/\D/g, '')),
+                size: size,
+                quantity: 1
+            };
+        }
+        
+        this.saveCart();
+        this.updateCounter(itemId);
+        return this.cart[itemId].quantity;
+    }
+    
+    // Уменьшаем количество товара
+    decreaseQuantity(name, size = null) {
+        const itemId = this.generateItemId(name, size);
+        
+        if (this.cart[itemId]) {
+            this.cart[itemId].quantity -= 1;
+            
+            if (this.cart[itemId].quantity <= 0) {
+                delete this.cart[itemId];
+            }
+            
+            this.saveCart();
+            this.updateCounter(itemId);
+        }
+        
+        return this.cart[itemId] ? this.cart[itemId].quantity : 0;
+    }
+    
+    // Увеличиваем количество товара
+    increaseQuantity(name, size = null) {
+        const itemId = this.generateItemId(name, size);
+        
+        if (this.cart[itemId]) {
+            this.cart[itemId].quantity += 1;
+            this.saveCart();
+            this.updateCounter(itemId);
+        }
+        
+        return this.cart[itemId] ? this.cart[itemId].quantity : 0;
+    }
+    
+    // Получаем текущее количество товара
+    getQuantity(name, size = null) {
+        const itemId = this.generateItemId(name, size);
+        return this.cart[itemId] ? this.cart[itemId].quantity : 0;
+    }
+    
+    // Сохраняем корзину в localStorage
+    saveCart() {
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+    }
+    
+    // Обновляем счетчик для конкретного товара
+    updateCounter(itemId) {
+        const item = this.cart[itemId];
+        if (!item) return;
+        
+        // Находим все карточки с этим товаром
+        document.querySelectorAll('[class*="card"]').forEach(card => {
+            const nameElement = card.querySelector('[class*="card-name"]');
+            if (!nameElement) return;
+            
+            const name = nameElement.textContent;
+            let size = null;
+            
+            // Проверяем размер (для напитков)
+            const activeSizeBtn = card.querySelector('.size-btn.active');
+            if (activeSizeBtn) {
+                size = activeSizeBtn.textContent.toLowerCase();
+            }
+            
+            const currentItemId = this.generateItemId(name, size);
+            
+            if (currentItemId === itemId) {
+                this.updateCardCounter(card, item.quantity);
+            }
+        });
+    }
+    
+    // Обновляем все счетчики при загрузке страницы
+    updateAllCounters() {
+        document.querySelectorAll('[class*="card"]').forEach(card => {
+            const nameElement = card.querySelector('[class*="card-name"]');
+            if (!nameElement) return;
+            
+            const name = nameElement.textContent;
+            let size = null;
+            
+            // Проверяем размер (для напитков)
+            const activeSizeBtn = card.querySelector('.size-btn.active');
+            if (activeSizeBtn) {
+                size = activeSizeBtn.textContent.toLowerCase();
+            }
+            
+            const quantity = this.getQuantity(name, size);
+            
+            if (quantity > 0) {
+                this.updateCardCounter(card, quantity);
+            }
+        });
+    }
+    
+    // Обновляем внешний вид карточки
+    updateCardCounter(card, quantity) {
+        const addButton = card.querySelector('.backetBut');
+        if (!addButton) return;
+        
+        if (quantity === 0) {
+            // Показываем обычную кнопку "В корзину"
+            addButton.innerHTML = 'В корзину';
+            addButton.style.display = 'block';
+            
+            // Удаляем контейнер счетчика, если он есть
+            const counterContainer = card.querySelector('.quantity-counter');
+            if (counterContainer) {
+                counterContainer.remove();
+            }
+        } else {
+            // Скрываем обычную кнопку
+            addButton.style.display = 'none';
+            
+            // Создаем или обновляем контейнер счетчика
+            let counterContainer = card.querySelector('.quantity-counter');
+            if (!counterContainer) {
+                counterContainer = document.createElement('div');
+                counterContainer.className = 'quantity-counter';
+                addButton.parentNode.appendChild(counterContainer);
+            }
+            
+            // Обновляем содержимое счетчика (без надписи "удалить")
+            counterContainer.innerHTML = `
+                <button class="counter-btn minus">-</button>
+                <span class="counter-value">${quantity}</span>
+                <button class="counter-btn plus">+</button>
+            `;
+            
+            // Добавляем обработчики для новых кнопок
+            this.addCounterEventListeners(counterContainer, card);
+        }
+    }
+    
+    // Добавляем обработчики для кнопок счетчика
+    addCounterEventListeners(counterContainer, card) {
+        const nameElement = card.querySelector('[class*="card-name"]');
+        const name = nameElement.textContent;
+        
+        // Кнопка уменьшения количества
+        const minusBtn = counterContainer.querySelector('.minus');
+        minusBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            let size = null;
+            const activeSizeBtn = card.querySelector('.size-btn.active');
+            if (activeSizeBtn) {
+                size = activeSizeBtn.textContent.toLowerCase();
+            }
+            
+            this.decreaseQuantity(name, size);
+        });
+        
+        // Кнопка увеличения количества
+        const plusBtn = counterContainer.querySelector('.plus');
+        plusBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            let size = null;
+            const activeSizeBtn = card.querySelector('.size-btn.active');
+            if (activeSizeBtn) {
+                size = activeSizeBtn.textContent.toLowerCase();
+            }
+            
+            this.increaseQuantity(name, size);
+        });
+    }
+    
+    // Инициализируем обработчики событий
+    initEventListeners() {
+        // Обработчики для кнопок "В корзину"
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('backetBut') && e.target.textContent === 'В корзину') {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const button = e.target;
+                const card = button.closest('[class*="card"]');
+                const nameElement = card.querySelector('[class*="card-name"]');
+                const priceElement = card.querySelector('[class*="price"]');
+                
+                if (nameElement && priceElement) {
+                    const name = nameElement.textContent;
+                    const priceText = priceElement.textContent;
+                    
+                    // Определяем размер
+                    let size = null;
+                    const activeSizeBtn = card.querySelector('.size-btn.active');
+                    if (activeSizeBtn) {
+                        size = activeSizeBtn.textContent.toLowerCase();
+                    }
+                    
+                    // Добавляем товар в корзину
+                    const quantity = this.addToCart(name, priceText, size);
+                    
+                    // Анимация кнопки
+                    button.classList.add('added-animation');
+                    setTimeout(() => {
+                        button.classList.remove('added-animation');
+                    }, 300);
+                }
+            }
+        });
+        
+        // Обработчики для кнопок размера
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('size-btn')) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const sizeBtn = e.target;
+                const container = sizeBtn.closest('.size-price, .size-priceC');
+                
+                if (container) {
+                    // Убираем активный класс у всех кнопок в контейнере
+                    container.querySelectorAll('.size-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Добавляем активный класс нажатой кнопке
+                    sizeBtn.classList.add('active');
+                    
+                    // Обновляем счетчик для нового размера
+                    const card = sizeBtn.closest('[class*="card"]');
+                    const nameElement = card.querySelector('[class*="card-name"]');
+                    if (nameElement) {
+                        const name = nameElement.textContent;
+                        const newSize = sizeBtn.textContent.toLowerCase();
+                        const oldSize = this.getPreviousActiveSize(container, sizeBtn);
+                        
+                        // Если товар уже был в корзине со старым размером, обновляем его
+                        if (oldSize !== newSize) {
+                            const oldQuantity = this.getQuantity(name, oldSize);
+                            if (oldQuantity > 0) {
+                                // Переносим количество на новый размер
+                                const itemIdOld = this.generateItemId(name, oldSize);
+                                const itemIdNew = this.generateItemId(name, newSize);
+                                
+                                if (this.cart[itemIdOld]) {
+                                    this.cart[itemIdNew] = {
+                                        ...this.cart[itemIdOld],
+                                        size: newSize
+                                    };
+                                    delete this.cart[itemIdOld];
+                                    this.saveCart();
+                                    this.updateCardCounter(card, this.cart[itemIdNew].quantity);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
 
 
 
@@ -621,3 +904,4 @@ document.addEventListener('DOMContentLoaded', function() {
         if ( isPasswordValid) {
             // Если всё ок - переходим на главную
             window.location.href = 'index_auth.html';
+
