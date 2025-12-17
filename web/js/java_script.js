@@ -577,7 +577,6 @@ document.querySelectorAll('.quantity-btn').forEach(button => {
       });
 
 
-
 document.addEventListener('DOMContentLoaded', function() {
     const loginInput = document.getElementById('loginInput');
     const passwordInput = document.getElementById('passwordInput');
@@ -585,19 +584,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordError = document.getElementById('passwordError');
     const enterButton = document.querySelector('.enter_button');
     
-    // Тогглер видимости пароля
-  
-    
-    // Валидация логина (ровно 8 символов)
- document.addEventListener('DOMContentLoaded', function() {
-    const loginInput = document.getElementById('loginInput');
-    const passwordInput = document.getElementById('passwordInput');
-    const loginError = document.getElementById('loginError');
-    const passwordError = document.getElementById('passwordError');
-    const enterButton = document.querySelector('.enter_button');
-    
     // Тогглер видимости пароля (убрали логику показа/скрытия текста)
-    
+    const passwordControl = document.querySelector('.password_control');
+    if (passwordControl) {
+        passwordControl.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
+    }
     
     // Валидация логина (больше 7 символов)
     function validateLogin() {
@@ -661,7 +659,4 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordError.style.display = 'none';
     });
 });
-
-
-
 
