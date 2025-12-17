@@ -572,56 +572,344 @@ document.querySelectorAll('.quantity-btn').forEach(button => {
       }
       
       // Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-    
-    const passwordInput = document.getElementById('passwordInput');
-    const passwordError = document.getElementById('passwordError');
-    
-    // Тогглер видимости пароля
-    
-       
-    
-    // Валидация пароля (минимум 6 символов)
-    function validatePassword() {
-        const value = passwordInput.value;
+ /* Контейнер корзины */
+      .basket-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+      
+      .basket-items {
+        flex: 1;
+        min-width: 300px;
+      }
+      
+      .order-summary {
+        width: 100%;
+        max-width: 400px;
+        background-color: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+      
+      .cart-item {
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      
+      .item-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-right: 20px;
+      }
+      
+      .item-details {
+        flex: 1;
+        min-width: 200px;
+      }
+      
+      .item-title {
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 5px;
+        color: var(--dark-color);
+      }
+      
+      .item-description {
+        color: #666;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+      
+      .item-size {
+        display: inline-block;
+        background-color: var(--light-color);
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 14px;
+        color: var(--dark-color);
+        margin-bottom: 10px;
+      }
+      
+      .item-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+      
+      .quantity-control {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 25px;
+        overflow: hidden;
+      }
+      
+      .quantity-btn {
+        background-color: #f8f8f8;
+        border: none;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      
+      .quantity-btn:hover {
+        background-color: #eee;
+      }
+      
+      .quantity-value {
+        width: 50px;
+        text-align: center;
+        font-weight: 600;
+      }
+      
+      .item-price {
+        font-weight: 700;
+        font-size: 22px;
+        color: var(--primary-color);
+      }
+      
+      .item-remove {
+        background: none;
+        border: none;
+        color: #999;
+        cursor: pointer;
+        font-size: 14px;
+        transition: color 0.2s;
+      }
+      
+      .item-remove:hover {
+        color: #ff5555;
+      }
+      
+      /* Секция итогов */
+      .summary-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--dark-color);
+        margin-bottom: 25px;
+        text-align: center;
+      }
+      
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px dashed #eee;
+      }
+      
+      .summary-total {
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--primary-color);
+        margin-top: 10px;
+        padding-top: 15px;
+        border-top: 2px solid var(--accent-color);
+      }
+      
+      .delivery-section, .payment-section {
+        margin-top: 25px;
+      }
+      
+      .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--dark-color);
+      }
+      
+      .delivery-option {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 10px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      
+      .delivery-option:hover {
+        background-color: #f9f9f9;
+      }
+      
+      .delivery-option.active {
+        background-color: var(--light-color);
+        border: 1px solid var(--accent-color);
+      }
+      
+      .delivery-icon {
+        margin-right: 10px;
+        color: var(--primary-color);
+        font-size: 18px;
+      }
+      
+      .address-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-top: 10px;
+        font-size: 16px;
+      }
+      
+      .payment-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .payment-option {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      
+      .payment-option:hover {
+        border-color: var(--accent-color);
+      }
+      
+      .payment-option.active {
+        border-color: var(--primary-color);
+        background-color: var(--light-color);
+      }
+      
+      .payment-icon {
+        font-size: 24px;
+        margin-bottom: 8px;
+        color: var(--primary-color);
+      }
+      
+     
+      
+      .main-button {
+        background-color: var(--primary-color);
+        color: #502C13;
+        border: none;
+        padding: 18px 60px;
+        font-size: 20px;
+        font-weight: 700;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s;
+      
+      }
+      
+      .main-button:hover {
+        background-color: var(--dark-color);
+        transform: translateY(-3px);
         
-        if (value.length < 6) {
-            passwordInput.style.borderColor = '#ff4444';
-            passwordError.textContent = 'Пароль должен содержать минимум 6 символов'; // ИСПРАВЛЕНО!
-            passwordError.style.display = 'block';
-            return false;
+      }
+      
+      .main-button:active {
+        transform: translateY(0);
+      }
+      
+      /* Футер */
+      
+      
+      /* Адаптивность */
+      @media (max-width: 992px) {
+        .basket-container {
+          flex-direction: column;
         }
         
-        passwordInput.style.borderColor = '';
-        passwordError.textContent = '';
-        passwordError.style.display = 'none';
-        return true;
-    }
-    
-    // Валидация при вводе
-    
-    passwordInput.addEventListener('blur', validatePassword);
-    
-    // Валидация при отправке
-    enterButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        
-        const isPasswordValid = validatePassword();
-        
-        if ( isPasswordValid) {
-            // Если всё ок - переходим на главную
-            window.location.href = 'index_auth.html';
+        .order-summary {
+          max-width: 100%;
         }
-    });
-    
- 
-    
-    passwordInput.addEventListener('focus', function() {
-        passwordInput.style.borderColor = '';
-        passwordError.style.display = 'none';
-    });
-});
+        
+        .info_address {
+          flex-direction: column;
+        }
+        
+        .logoFooter {
+            margin-top: 45px;
+          margin-bottom: 20px;
+          width: 69px;
+          height: 69px;
+        }
+        
+        .namTel {
+          margin-right: 0;
+          margin-bottom: 25px;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .navbar-custom {
+          flex-wrap: wrap;
+        }
+        
+        .nav_auth {
+          order: 3;
+          width: 100%;
+          justify-content: center;
+          margin-top: 15px;
+        }
+        
+        .right_header {
+          order: 2;
+        }
+        
+        .cart-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        
+        .item-image {
+          margin-right: 0;
+          margin-bottom: 15px;
+        }
+        
+        .item-controls {
+          width: 100%;
+        }
+        
+        .copyr_rights {
+          flex-direction: column;
+          text-align: center;
+          gap: 10px;
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .basket_n {
+          font-size: 28px;
+        }
+        
+        .item-title {
+          font-size: 18px;
+        }
+        
+        .main-button {
+          width: 100%;
+          padding: 16px 30px;
+        }
+        
+        .payment-options {
+          flex-direction: column;
+        }
+      }
+
+
 
 
 
