@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="web/css/style.css" />
+  </head>
+
+
+<body>
+
+
+    <header>
+      
+
+       <nav class="nav-main nav_auth">
+        <div class="nav-wrapper">
+            
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><img class="logotype" src="web/img/1.svg" alt="логотип"/></li>
+                    <li><a href="index_auth.html" class="nav_link">Главная</a></li>
+                    <li><a href="menu_auth.html" class="nav_link">Меню</a></li>
+                </ul>
+            </div>
+            
+            
+            <div class="nav-right">
+                <div class="nav-icons">
+                    <a href="basket.html" class="nav-icon">
+                        <img src="web/img/bascet.svg" alt="корзина">
+                    </a>
+                    <a href="profile.html" class="nav-icon">
+                        <img src="web/img/profile.svg" alt="профиль">
+                    </a>
+                </div>
+                <button class="nav-toggle" aria-label="Открыть меню">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    </header>
+    
+    <main>
+      <div class="name_basket">
+        <p class="basket_n">Корзина</p>
+      </div>
+      
+      <div class="container">
+        <div class="row basket-container">
+          <div class="col-lg-8 basket-items">
+            <!-- Товар 1 -->
+            <div class="cart-item">
+              <img src="/web/img/imgCCC.png" alt="Капучино" class="item-image">
+              <div class="item-details">
+                <h3 class="item-title">Капучино Каштан-Шоколад M</h3>
+                <p class="item-description">Ароматный капучино с нотками каштана и шоколада</p>
+                <span class="item-size">300 мл</span>
+                <div class="item-controls">
+                  <div class="quantity-control">
+                    <button class="quantity-btn minus-btn">-</button>
+                    <span class="quantity-value">1</span>
+                    <button class="quantity-btn plus-btn">+</button>
+                  </div>
+                  <div class="price-control">
+                    <span class="item-price">250 ₽</span>
+                    <button class="item-remove"><i class="fas fa-trash-alt"></i> Удалить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Товар 2 -->
+            <div class="cart-item">
+              <img src="/web/img/imgPSS.png" alt="Пышка" class="item-image">
+              <div class="item-details">
+                <h3 class="item-title">Пышка со сгущенкой</h3>
+                <p class="item-description">Свежая пышка с нежной сгущенкой внутри</p>
+                <div class="item-controls">
+                  <div class="quantity-control">
+                    <button class="quantity-btn minus-btn">-</button>
+                    <span class="quantity-value">2</span>
+                    <button class="quantity-btn plus-btn">+</button>
+                  </div>
+                  <div class="price-control">
+                    <span class="item-price">65 ₽</span>
+                    <button class="item-remove"><i class="fas fa-trash-alt"></i> Удалить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Товар 3 -->
+            <div class="cart-item">
+              <img src="/web/img/imgPSP.png" alt="Пышка" class="item-image">
+              <div class="item-details">
+                <h3 class="item-title">Пышка с пудрой</h3>
+                <p class="item-description">Классическая пышка, посыпанная сахарной пудрой</p>
+                <div class="item-controls">
+                  <div class="quantity-control">
+                    <button class="quantity-btn minus-btn">-</button>
+                    <span class="quantity-value">1</span>
+                    <button class="quantity-btn plus-btn">+</button>
+                  </div>
+                  <div class="price-control">
+                    <span class="item-price">35 ₽</span>
+                    <button class="item-remove"><i class="fas fa-trash-alt"></i> Удалить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 order-summary">
+            <h3 class="summary-title">Ваш заказ</h3>
+            
+            <div class="summary-row">
+              <span>3 товара</span>
+              <span>555 ₽</span>
+            </div>
+            
+            <div class="summary-row">
+              <span>Доставка:</span>
+              <span style="color: #28a745; font-weight: 600;">Бесплатно</span>
+            </div>
+            
+            <div class="summary-row summary-total">
+              <span>Итого:</span>
+              <span>555 ₽</span>
+            </div>
+            
+            <div class="delivery-section">
+              <h4 class="section-title">Доставка</h4>
+              <div class="delivery-option active">
+                <i class="fas fa-truck delivery-icon"></i>
+                <div>
+                  <div>Доставка курьером</div>
+                  <input type="text" class="address-input" placeholder="Введите адрес доставки">
+                </div>
+              </div>
+              <div class="delivery-option">
+                <i class="fas fa-store delivery-icon"></i>
+                <div>
+                  <div>Самовывоз</div>
+                  
+                  <input type="text" class="address-input" placeholder="Выберите адрес самовывоза" disabled>
+                </div>
+              
+              </div>
+            </div>
+            
+            <div class="payment-section">
+              <h4 class="section-title">Способ оплаты</h4>
+              <div class="payment-options">
+                <div class="payment-option active">
+                  <i class="fas fa-credit-card payment-icon"></i>
+                  <div>Картой онлайн</div>
+                </div>
+                <div class="payment-option">
+                  <i class="fas fa-money-bill-wave payment-icon"></i>
+                  <div>Наличными при получении</div>
+                </div>
+                <div class="payment-option">
+                  <i class="fas fa-mobile-alt payment-icon"></i>
+                  <div>Картой при получении</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="button-container">
+          <button class="main-button">Заказать</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer_info">
+        <div class="info_address">
+          <img src="https://via.placeholder.com/150x50/FFFFFF/8B4513?text=LOGO" alt="логотип" class="logoFooter" />
+          <div class="namTel">
+            <p class="nameOrg">Петербургские пышки</p>
+            <p class="telNumber1">8 (800) 535-35-35</p>
+            <p class="telNumber2">8 (800) 535-53-53</p>
+          </div>
+          <div class="addressMain">
+            <p class="address">Наши адреса:</p>
+            <p class="address1">
+              Россия, г. Санкт-Петербург 192242, Балканская площадь, 5Я
+            </p>
+            <p class="address2">
+              Россия, г. Санкт-Петербург 192242, ул.Фучика, 2
+            </p>
+            <p class="address3">
+              Россия, г. Санкт-Петербург, Индустриальный проспект, 31
+            </p>
+          </div>
+        </div>
+
+        <div class="info_social_network">
+          <p class="text_social_network">
+            Присоединяйтесь к нам в социальных сетях
+          </p>
+        </div>
+        <div class="icons">
+          <a href="https://vk.com/">
+            <img src="https://via.placeholder.com/40/FFFFFF/8B4513?icon=VK" alt="Иконка ВК" class="PhotoVK" />
+          </a>
+          <a href="https://web.telegram.org/">
+            <img src="https://via.placeholder.com/40/FFFFFF/8B4513?icon=TG" alt="иконка Тг" class="PhotoTg" />
+          </a>
+        </div>
+      </div>
+
+      <div class="copyr_rights">
+        <p class="copyra">© 2025 “Петербургские пышки”</p>
+        <p class="rights_reserved">Все права защищены</p>
+      </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    
+    <script>
+      // Функционал изменения количества товаров
+      document.querySelectorAll('.quantity-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const isMinus = this.classList.contains('minus-btn');
+          const quantityValue = this.parentElement.querySelector('.quantity-value');
+          let currentValue = parseInt(quantityValue.textContent);
+          
+          if (isMinus && currentValue > 1) {
+            quantityValue.textContent = currentValue - 1;
+          } else if (!isMinus) {
+            quantityValue.textContent = currentValue + 1;
+          }
+          
+          updateTotalPrice();
+        });
+      });
+      
+      // Удаление товара
+      document.querySelectorAll('.item-remove').forEach(button => {
+        button.addEventListener('click', function() {
+          const cartItem = this.closest('.cart-item');
+          cartItem.style.transform = 'translateX(-100%)';
+          cartItem.style.opacity = '0';
+          setTimeout(() => {
+            cartItem.remove();
+            updateTotalPrice();
+          }, 300);
+        });
+      });
+      
+      // Выбор способа доставки
+      document.querySelectorAll('.delivery-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.delivery-option').forEach(opt => {
+            opt.classList.remove('active');
+            const input = opt.querySelector('input');
+            if (input) input.disabled = true;
+          });
+          
+          this.classList.add('active');
+          const input = this.querySelector('input');
+          if (input) input.disabled = false;
+        });
+      });
+      
+      // Выбор способа оплаты
+      document.querySelectorAll('.payment-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.payment-option').forEach(opt => {
+            opt.classList.remove('active');
+          });
+          this.classList.add('active');
+        });
+      });
+      
+      // Обновление итоговой суммы
+      function updateTotalPrice() {
+        let total = 0;
+        let itemCount = 0;
+        
+        document.querySelectorAll('.cart-item').forEach(item => {
+          const quantity = parseInt(item.querySelector('.quantity-value').textContent);
+          const priceText = item.querySelector('.item-price').textContent;
+          const price = parseInt(priceText.replace(/[^\d]/g, ''));
+          
+          total += price * quantity;
+          itemCount += quantity;
+        });
+        
+        // Обновляем количество товаров
+        const itemCountElement = document.querySelector('.summary-row:first-child span:first-child');
+        if (itemCountElement) {
+          itemCountElement.textContent = `${itemCount} ${getCorrectWordForm(itemCount, ['товар', 'товара', 'товаров'])}`;
+        }
+        
+        // Обновляем итоговую сумму
+        const totalElement = document.querySelector('.summary-total span:last-child');
+        if (totalElement) {
+          totalElement.textContent = `${total} ₽`;
+        }
+        
+        // Обновляем промежуточную сумму
+        const subtotalElement = document.querySelector('.summary-row:first-child span:last-child');
+        if (subtotalElement) {
+          subtotalElement.textContent = `${total} ₽`;
+        }
+      }
+      
+      // Функция для правильного склонения слов
+      function getCorrectWordForm(number, words) {
+        const cases = [2, 0, 1, 1, 1, 2];
+        return words[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+      }
+      
+      // Инициализация при загрузке
+      document.addEventListener('DOMContentLoaded', function() {
+        updateTotalPrice();
+      });
+    </script>
+    <script src="web/js/java_script.js"></script>
+  </body>
+</html>

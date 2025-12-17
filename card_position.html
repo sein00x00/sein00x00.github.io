@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="web/css/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+  <header>
+
+    <!-- <nav class="nav_auth">
+      <li><img class="logotype" src="web/img/1.svg" alt="логотип" /></li>
+      <li><a href="index_auth.html" class="nav_link">Главная</a></li>
+      <li><a href="menu_auth.html" class="nav_link">Меню</a></li>
+
+    </nav>
+    <div class="right_header">
+      <a href="basket.html"><img class="nav_link" src="web/img/bascet.svg" alt=""></a>
+      <a href="profile.html"><img class="nav_link_active" src="web/img/profile.svg" alt="профиль"></a>
+    </div> -->
+     <nav class="nav-main nav_auth">
+        <div class="nav-wrapper">
+            <!-- Логотип слева -->
+            <!-- <div class="nav-logo">
+                
+            </div>
+             -->
+            <!-- Центральные ссылки -->
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><img class="logotype" src="web/img/1.svg" alt="логотип"/></li>
+                    <li><a href="index_auth.html" class="nav_link">Главная</a></li>
+                    <li><a href="menu_auth.html" class="nav_link">Меню</a></li>
+                </ul>
+            </div>
+            
+            <!-- Правая часть (иконки) -->
+            <div class="nav-right">
+                <div class="nav-icons">
+                    <a href="basket.html" class="nav-icon">
+                        <img src="web/img/bascet.svg" alt="корзина">
+                    </a>
+                    <a href="profile.html" class="nav-icon">
+                        <img src="web/img/profile.svg" alt="профиль">
+                    </a>
+                </div>
+                <button class="nav-toggle" aria-label="Открыть меню">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+  </header>
+  
+    <main class="product-page">
+        <div class="container">
+            <div class="product-layout">
+                <!-- Левая часть - изображения товара -->
+                <div class="product-images">
+                    <div class="main-image">
+                        <img id="main-product-img" src="web/img/pushka_product_main.png" alt="Пышка">
+                    </div>
+                    <div class="thumbnails">
+                        <div class="thumbnail active" onclick="changeImage('web/img/pushka_product_main.png')">
+                            <img src="web/img/pushka_product_main.png" alt="Пышка">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('web/img/pushka_side1.png')">
+                            <img src="web/img/pushka_side1.png" alt="Пышка сбоку">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('web/img/pushka_side2.png')">
+                            <img src="web/img/pushka_side2.png" alt="Пышка в разрезе">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('web/img/pushka_package.png')">
+                            <img src="web/img/pushka_package.png" alt="Упаковка">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Правая часть - информация о товаре -->
+                <div class="product-info">
+                    <h1 class="product-title">Классическая пышка с сахарной пудрой</h1>
+                    <div class="product-price">80 ₽</div>
+                    
+                    <p class="product-description">
+                        Нежная, воздушная пышка с хрустящей корочкой и мягкой сердцевиной. 
+                        Традиционная рецептура, приготовленная на раскаленном масле. 
+                        Посыпана сахарной пудрой для идеального сочетания сладости и мягкости.
+                    </p>
+                    
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Вес:</span>
+                            <span class="detail-value">150 г</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Калорийность:</span>
+                            <span class="detail-value">320 ккал/100г</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Состав:</span>
+                            <span class="detail-value">мука, вода, дрожжи, сахар, соль, сахарная пудра</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Срок годности:</span>
+                            <span class="detail-value">24 часа</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Аллергены:</span>
+                            <span class="detail-value">глютен</span>
+                        </div>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn-primary" onclick="addToCart()">В корзину</button>
+                        <button class="btn-secondary" onclick="addToFavorites()">В избранное</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Секция с отзывами -->
+           
+    </main>
+
+
+  <footer>
+    <div>
+      <div class="footer_info">
+        <div class="info_address">
+          <img src="web/img/1.svg" alt="логотип" class="logoFooter" />
+          <div class="namTel">
+            <p class="nameOrg">Петербургские пышки</p>
+            <p class="telNumber1">8 (800) 535-35-35</p>
+            <p class="telNumber2">8 (800) 535-53-53</p>
+          </div>
+          <div class="addressMain">
+            <p class="address">Наши адреса:</p>
+            <p class="address1">
+              Россия, г. Санкт-Петербург 192242, Балканская площадь, 5Я
+            </p>
+            <p class="address2">
+              Россия, г. Санкт-Петербург 192242, ул.Фучика, 2
+            </p>
+            <p class="address3">
+              Россия, г. Санкт-Петербург, Индустриальный проспект, 31
+            </p>
+          </div>
+        </div>
+
+        <div class="info_social_network">
+          <p class="text_social_network">
+            Присоединяйтесь к нам в социальных сетях
+          </p>
+        </div>
+        <div class="icons">
+          <a href="https://vk.com/"><img src="Web/img/vk.svg" alt="Иконка ВК" class="PhotoVK" /></a>
+          <a href="https://web.telegram.org/a/"><img src="Web/img/tg.svg" alt="иконка Тг" class="PhotoTg" /></a>
+        </div>
+      </div>
+
+      <div class="copyr_rights">
+        <p class="copyra">© 2025 “Петербургские пышки”</p>
+        <p class="rights_reserved">Все права защищены</p>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+    <script src="web/js/java_script.js"></script>
+</body>
+
+</html>
+
+
+
