@@ -604,9 +604,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateLogin() {
         const value = loginInput.value.trim();
         
-        if (value.length !== 8) {
+        if (value.length >= 8) {
             loginInput.style.borderColor = '#ff4444';
-            loginError.textContent = 'Логин должен содержать ровно 8 символов'; // ИСПРАВЛЕНО!
+            loginError.textContent = 'Логин должен содержать больше 7 символов'; // ИСПРАВЛЕНО!
             loginError.style.display = 'block';
             return false;
         }
@@ -662,5 +662,6 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordError.style.display = 'none';
     });
 });
+
 
 
