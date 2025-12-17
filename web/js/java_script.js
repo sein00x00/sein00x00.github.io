@@ -594,22 +594,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Валидация логина (ровно 8 символов)
-    function validateLogin() {
-        const value = loginInput.value.trim();
-        
-        if (value.length !== 8) {
-            loginInput.style.borderColor = '#ff4444';
-            loginError.textContent = 'Логин должен содержать ровно 8 символов'; // ИСПРАВЛЕНО!
-            loginError.style.display = 'block';
-            return false;
-        }
-        
-        loginInput.style.borderColor = '';
-        loginError.textContent = '';
-        loginError.style.display = 'none';
-        return true;
-    }
+
     
     // Валидация пароля (минимум 6 символов)
     function validatePassword() {
@@ -656,5 +641,6 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordError.style.display = 'none';
     });
 });
+
 
 
