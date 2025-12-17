@@ -541,7 +541,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenuHTML += `
                 <ul class="mobile-nav-list">
                     <li><a href="index.html" class="nav_link">Главная</a></li>
-                    <li><a href="menu.html" class="nav_link_active">Меню</a></li>
+                    <li><a href="menu.html" class="nav_link">Меню</a></li>
                 </ul>
                 <div class="mobile-auth-section">
                     <a href="auth.html" class="mobile-auth-link">Вход</a>
@@ -720,6 +720,7 @@ document.querySelectorAll('.quantity-btn').forEach(button => {
       document.addEventListener('DOMContentLoaded', function() {
         updateTotalPrice();
       });
+
 
 
 
