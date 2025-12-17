@@ -4030,7 +4030,7 @@ body.menu-open {
     display: none;
 }
 
-.input_login,
+
 .input_password {
     border: 1px solid #ddd;
     padding: 10px;
@@ -4054,6 +4054,7 @@ body.menu-open {
     background-size: contain;
     cursor: pointer;
 }
+
 
 
 
