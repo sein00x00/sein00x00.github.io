@@ -572,9 +572,6 @@ document.querySelectorAll('.quantity-btn').forEach(button => {
       }
       
       // Инициализация при загрузке
-      document.addEventListener('DOMContentLoaded', function() {
-        updateTotalPrice();
-      });
 document.addEventListener('DOMContentLoaded', function() {
     const loginInput = document.getElementById('loginInput');
     const passwordInput = document.getElementById('passwordInput');
@@ -582,33 +579,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordError = document.getElementById('passwordError');
     const enterButton = document.querySelector('.enter_button');
     
-   document.addEventListener('DOMContentLoaded', function() {
-    const loginInput = document.getElementById('loginInput');
-    const passwordInput = document.getElementById('passwordInput');
-    const loginError = document.getElementById('loginError');
-    const passwordError = document.getElementById('passwordError');
-    const enterButton = document.querySelector('.enter_button');
-    
-    // Тогглер видимости пароля (убрали логику показа/скрытия текста)
+    // Тогглер видимости пароля
     const passwordControl = document.querySelector('.password_control');
     if (passwordControl) {
         passwordControl.addEventListener('click', function(e) {
             e.preventDefault();
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
+                this.textContent = 'Скрыть';
             } else {
                 passwordInput.type = 'password';
+                this.textContent = 'Показать';
             }
         });
     }
     
-    // Валидация логина (больше 7 символов)
+    // Валидация логина (ровно 8 символов)
     function validateLogin() {
         const value = loginInput.value.trim();
         
-        if (value.length < 8) { // Изменили с !== 8 на < 8
+        if (value.length !== 8) {
             loginInput.style.borderColor = '#ff4444';
-            loginError.textContent = 'Логин должен содержать больше 7 символов';
+            loginError.textContent = 'Логин должен содержать ровно 8 символов'; // ИСПРАВЛЕНО!
             loginError.style.display = 'block';
             return false;
         }
@@ -625,7 +617,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (value.length < 6) {
             passwordInput.style.borderColor = '#ff4444';
-            passwordError.textContent = 'Пароль должен содержать минимум 6 символов';
+            passwordError.textContent = 'Пароль должен содержать минимум 6 символов'; // ИСПРАВЛЕНО!
             passwordError.style.display = 'block';
             return false;
         }
@@ -664,5 +656,5 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordError.style.display = 'none';
     });
 });
-});
+
 
