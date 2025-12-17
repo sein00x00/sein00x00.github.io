@@ -589,12 +589,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
     
     // Валидация логина (ровно 8 символов)
+ document.addEventListener('DOMContentLoaded', function() {
+    const loginInput = document.getElementById('loginInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginError = document.getElementById('loginError');
+    const passwordError = document.getElementById('passwordError');
+    const enterButton = document.querySelector('.enter_button');
+    
+    // Тогглер видимости пароля (убрали логику показа/скрытия текста)
+    
+    
+    // Валидация логина (больше 7 символов)
     function validateLogin() {
         const value = loginInput.value.trim();
         
-        if (value.length >= 8) {
+        if (value.length < 8) { // Изменили с !== 8 на < 8
             loginInput.style.borderColor = '#ff4444';
-            loginError.textContent = 'Логин должен содержать больше 7 символов'; // ИСПРАВЛЕНО!
+            loginError.textContent = 'Логин должен содержать больше 7 символов';
             loginError.style.display = 'block';
             return false;
         }
@@ -611,7 +622,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (value.length < 6) {
             passwordInput.style.borderColor = '#ff4444';
-            passwordError.textContent = 'Пароль должен содержать минимум 6 символов'; // ИСПРАВЛЕНО!
+            passwordError.textContent = 'Пароль должен содержать минимум 6 символов';
             passwordError.style.display = 'block';
             return false;
         }
