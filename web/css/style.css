@@ -2366,6 +2366,7 @@ html {
     padding: 0 auto;
     justify-content: center;
     gap: 80px;
+    margin-botoom: 10px;
 }
 
 .nameMenu {
@@ -4054,6 +4055,7 @@ body.menu-open {
     background-size: contain;
     cursor: pointer;
 }
+
 
 
 
