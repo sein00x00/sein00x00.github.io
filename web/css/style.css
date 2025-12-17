@@ -3682,7 +3682,7 @@ body.menu-open {
         
         .main-image {
             width: 100%;
-            height: 800px;
+            height: 400px;
             background: #FDE8C3;
             border-radius: 20px;
             display: flex;
@@ -4017,3 +4017,4 @@ body.menu-open {
             }
 
         }
+
