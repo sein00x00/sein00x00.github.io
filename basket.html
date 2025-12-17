@@ -144,8 +144,30 @@
               <div class="delivery-option">
                 <i class="fas fa-store delivery-icon"></i>
                 <div>
-                  <div>Самовывоз</div>
                   
+                    <div>Самовывоз</div>
+          <!-- Добавляем кастомный выпадающий список -->
+          <div class="custom-dropdown">
+            <input type="text" 
+                   class="dropdown-input" 
+                   placeholder="Самовывоз по адресу"
+                   readonly
+                   id="pickupAddress"
+                   aria-label="Выберите адрес самовывоза">
+            <div class="dropdown-arrow">▼</div>
+            <div class="dropdown-list" id="addressList">
+              <div class="dropdown-item" data-value="Россия, г. Санкт-Петербург 192242, Балканская площадь, 5Я">
+                Россия, г. Санкт-Петербург 192242, Балканская площадь, 5Я
+              </div>
+              <div class="dropdown-item" data-value="Россия, г. Санкт-Петербург 192242, ул.Фучика, 2">
+                Россия, г. Санкт-Петербург 192242, ул.Фучика, 2
+              </div>
+              <div class="dropdown-item" data-value="Россия, г. Санкт-Петербург, Индустриальный проспект, 31">
+                Россия, г. Санкт-Петербург, Индустриальный проспект, 31
+              </div>
+            </div>
+          </div>
+        </div>
                   <input type="text" class="address-input" placeholder="Выберите адрес самовывоза" disabled>
                 </div>
               
@@ -329,4 +351,5 @@
   </body>
 
 </html>
+
 
