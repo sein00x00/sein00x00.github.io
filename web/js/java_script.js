@@ -770,3 +770,150 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'index_auth.html';
 
 
+
+
+// Адаптивное меню для телефонов
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const isAuth = document.querySelector('.nav_auth');
+    
+    // Создаем мобильное меню
+    function createMobileMenu() {
+        // Если меню уже есть, удаляем старое
+        const existingMenu = document.querySelector('.mobile-menu');
+        const existingOverlay = document.querySelector('.menu-overlay');
+        
+        if (existingMenu) existingMenu.remove();
+        if (existingOverlay) existingOverlay.remove();
+        
+        let mobileMenuHTML = `
+            <div class="mobile-menu">
+                <div class="mobile-menu-header">
+                    <img class="mobile-logo" src="web/img/1.svg" alt="логотип"/>
+                    <button class="close-menu" aria-label="Закрыть меню">×</button>
+                </div>
+        `;
+        
+        if (isAuth) {
+            mobileMenuHTML += `
+                <div class="mobile-profile">
+                    <div class="mobile-profile-avatar">
+                      <a href=profile.html>  <img src="web/img/profile.svg" alt="профиль"></a>
+                    </div>
+                    <div class="mobile-profile-info">
+                        <h4>Пышкин Пыша Пышкович</h4>
+                    </div>
+                    
+                </div>
+                <ul class="mobile-nav-list">
+                    <li><a href="index_auth.html" class="nav_link">Главная</a></li>
+                    <li><a href="menu_auth.html" class="nav_link">Меню</a></li>
+                    <li><a href="basket.html" clalass="nav_link">Корзина</a> </li>
+                </ul>
+               
+                <div class="mobile-auth-section">
+                    <a href="index.html" class="mobile-auth-link">Выйти</a>
+                </div>
+            `;
+        } else {
+            mobileMenuHTML += `
+                <ul class="mobile-nav-list">
+                    <li><a href="index.html" class="nav_link">Главная</a></li>
+                    <li><a href="menu.html" class="nav_link_active">Меню</a></li>
+                </ul>
+                <div class="mobile-auth-section">
+                    <a href="auth.html" class="mobile-auth-link">Вход</a>
+                </div>
+            `;
+        }
+        
+        mobileMenuHTML += `</div><div class="menu-overlay"></div>`;
+        document.body.insertAdjacentHTML('beforeend', mobileMenuHTML);
+        
+        initMenuEvents();
+    }
+    
+    // Инициализация событий
+    function initMenuEvents() {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeBtn = document.querySelector('.close-menu');
+        const overlay = document.querySelector('.menu-overlay');
+        
+        function openMenu() {
+            navToggle.classList.add('active');
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.classList.add('menu-open');
+        }
+        
+        function closeMenu() {
+            navToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+        
+        // Открытие
+        navToggle.addEventListener('click', openMenu);
+        
+        // Закрытие
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+        
+        // Закрытие при клике на ссылку
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => setTimeout(closeMenu, 300));
+        });
+        
+        // ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    }
+    
+    // Проверка размера экрана
+    function checkScreenSize() {
+        if (window.innerWidth <= 767) {
+            createMobileMenu();
+        } else {
+            // Удаляем меню на десктопе
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.menu-overlay');
+            
+            if (mobileMenu) mobileMenu.remove();
+            if (overlay) overlay.remove();
+            
+            if (navToggle) navToggle.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+    }
+    
+    // Инициализация
+    checkScreenSize();
+    
+    // Ресайз
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(checkScreenSize, 250);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
