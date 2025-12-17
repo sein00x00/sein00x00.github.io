@@ -582,7 +582,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordError = document.getElementById('passwordError');
     const enterButton = document.querySelector('.enter_button');
     
-    // Тогглер видимости пароля
+   document.addEventListener('DOMContentLoaded', function() {
+    const loginInput = document.getElementById('loginInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginError = document.getElementById('loginError');
+    const passwordError = document.getElementById('passwordError');
+    const enterButton = document.querySelector('.enter_button');
+    
+    // Тогглер видимости пароля (убрали логику показа/скрытия текста)
     const passwordControl = document.querySelector('.password_control');
     if (passwordControl) {
         passwordControl.addEventListener('click', function(e) {
@@ -599,7 +606,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateLogin() {
         const value = loginInput.value.trim();
         
-        if (value.length < 8) { // ИСПРАВЛЕНО! Было > 7, стало < 8
+        if (value.length < 8) { // Изменили с !== 8 на < 8
             loginInput.style.borderColor = '#ff4444';
             loginError.textContent = 'Логин должен содержать больше 7 символов';
             loginError.style.display = 'block';
@@ -643,9 +650,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isLoginValid && isPasswordValid) {
             // Если всё ок - переходим на главную
             window.location.href = 'index_auth.html';
-        } else {
-            // Показываем, какая именно ошибка
-            console.log('Login valid:', isLoginValid, 'Password valid:', isPasswordValid);
         }
     });
     
@@ -659,10 +663,6 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordInput.style.borderColor = '';
         passwordError.style.display = 'none';
     });
-    
-    // Отладка
-    console.log('Script loaded');
-    console.log('Login input:', loginInput);
-    console.log('Password input:', passwordInput);
-    console.log('Enter button:', enterButton);
 });
+});
+
