@@ -575,9 +575,7 @@ document.querySelectorAll('.quantity-btn').forEach(button => {
 document.addEventListener('DOMContentLoaded', function() {
     
     const passwordInput = document.getElementById('passwordInput');
-    
     const passwordError = document.getElementById('passwordError');
-    const enterButton = document.querySelector('.enter_button');
     
     // Тогглер видимости пароля
     
@@ -617,17 +615,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Очистка ошибок при фокусе
-    loginInput.addEventListener('focus', function() {
-        loginInput.style.borderColor = '';
-        loginError.style.display = 'none';
-    });
+ 
     
     passwordInput.addEventListener('focus', function() {
         passwordInput.style.borderColor = '';
         passwordError.style.display = 'none';
     });
 });
+
 
 
 
