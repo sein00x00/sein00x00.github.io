@@ -726,6 +726,175 @@ document.querySelectorAll('.quantity-btn').forEach(button => {
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Элементы формы
+    const loginInput = document.getElementById('loginInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginError = document.getElementById('loginError');
+    const passwordError = document.getElementById('passwordError');
+    const enterButton = document.querySelector('.enter_button');
+    const authForm = document.querySelector('.card_auth');
+    
+    // Тогглер видимости пароля
+    const passwordControl = document.querySelector('.password_control');
+    if (passwordControl) {
+        passwordControl.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.classList.add('view');
+            } else {
+                passwordInput.type = 'password';
+                this.classList.remove('view');
+            }
+        });
+    }
+    
+    // Регулярные выражения для валидации
+    const loginRegex = /^[a-zA-Z0-9_.-]{3,20}$/; // 3-20 символов: буквы, цифры, _ . -
+    const passwordRegex = /^.{6,}$/; // минимум 6 символов
+    
+    // Функции валидации
+    function validateLogin() {
+        const value = loginInput.value.trim();
+        
+        if (!value) {
+            showError(loginInput, loginError, 'Введите логин');
+            return false;
+        }
+        
+        if (!loginRegex.test(value)) {
+            showError(loginInput, loginError, 'Логин должен содержать 3-20 символов (буквы, цифры, _ . -)');
+            return false;
+        }
+        
+        clearError(loginInput, loginError);
+        return true;
+    }
+    
+    function validatePassword() {
+        const value = passwordInput.value;
+        
+        if (!value) {
+            showError(passwordInput, passwordError, 'Введите пароль');
+            return false;
+        }
+        
+        if (!passwordRegex.test(value)) {
+            showError(passwordInput, passwordError, 'Пароль должен содержать минимум 6 символов');
+            return false;
+        }
+        
+        clearError(passwordInput, passwordError);
+        return true;
+    }
+    
+    // Функции для работы с ошибками
+    function showError(input, errorElement, message) {
+        input.style.borderColor = '#ff4444';
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+    
+    function clearError(input, errorElement) {
+        input.style.borderColor = '';
+        errorElement.textContent = '';
+        errorElement.style.display = 'none';
+    }
+    
+    // Валидация при вводе (live validation)
+    loginInput.addEventListener('input', function() {
+        if (loginError.style.display === 'block') {
+            validateLogin();
+        }
+    });
+    
+    loginInput.addEventListener('blur', validateLogin);
+    
+    passwordInput.addEventListener('input', function() {
+        if (passwordError.style.display === 'block') {
+            validatePassword();
+        }
+    });
+    
+    passwordInput.addEventListener('blur', validatePassword);
+    
+    // Валидация при отправке формы
+    enterButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const isLoginValid = validateLogin();
+        const isPasswordValid = validatePassword();
+        
+        if (isLoginValid && isPasswordValid) {
+            // Имитация отправки данных на сервер
+            simulateAuth();
+        } else {
+            // Прокрутка к первой ошибке
+            if (!isLoginValid) {
+                loginInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else if (!isPasswordValid) {
+                passwordInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    });
+    
+    // Имитация авторизации
+    function simulateAuth() {
+        enterButton.disabled = true;
+        enterButton.textContent = 'Вход...';
+        
+        // Имитация запроса к серверу
+        setTimeout(function() {
+            // Проверка демо-данных (для теста)
+            const demoLogin = 'user123';
+            const demoPassword = 'password123';
+            
+            if (loginInput.value.trim() === demoLogin && passwordInput.value === demoPassword) {
+                // Успешная авторизация
+                alert('Авторизация успешна! Перенаправление на главную страницу...');
+                window.location.href = 'index_auth.html';
+            } else {
+                // Неверные данные
+                showError(loginInput, loginError, 'Неверный логин или пароль');
+                showError(passwordInput, passwordError, 'Неверный логин или пароль');
+                enterButton.disabled = false;
+                enterButton.textContent = 'Войти';
+                
+                // Очистка полей
+                passwordInput.value = '';
+                
+                // Фокус на логине
+                loginInput.focus();
+            }
+        }, 1500);
+    }
+    
+    // Обработка нажатия Enter в полях ввода
+    loginInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            validateLogin();
+            passwordInput.focus();
+        }
+    });
+    
+    passwordInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            enterButton.click();
+        }
+    });
+    
+    // Очистка ошибок при фокусе
+    loginInput.addEventListener('focus', function() {
+        clearError(loginInput, loginError);
+    });
+    
+    passwordInput.addEventListener('focus', function() {
+        clearError(passwordInput, passwordError);
+    });
+});
 
 
 
