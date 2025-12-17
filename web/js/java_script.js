@@ -623,6 +623,103 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.querySelectorAll('.quantity-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const isMinus = this.classList.contains('minus-btn');
+          const quantityValue = this.parentElement.querySelector('.quantity-value');
+          let currentValue = parseInt(quantityValue.textContent);
+          
+          if (isMinus && currentValue > 1) {
+            quantityValue.textContent = currentValue - 1;
+          } else if (!isMinus) {
+            quantityValue.textContent = currentValue + 1;
+          }
+          
+          updateTotalPrice();
+        });
+      });
+      
+      // Удаление товара
+      document.querySelectorAll('.item-remove').forEach(button => {
+        button.addEventListener('click', function() {
+          const cartItem = this.closest('.cart-item');
+          cartItem.style.transform = 'translateX(-100%)';
+          cartItem.style.opacity = '0';
+          setTimeout(() => {
+            cartItem.remove();
+            updateTotalPrice();
+          }, 300);
+        });
+      });
+      
+      // Выбор способа доставки
+      document.querySelectorAll('.delivery-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.delivery-option').forEach(opt => {
+            opt.classList.remove('active');
+            const input = opt.querySelector('input');
+            if (input) input.disabled = true;
+          });
+          
+          this.classList.add('active');
+          const input = this.querySelector('input');
+          if (input) input.disabled = false;
+        });
+      });
+      
+      // Выбор способа оплаты
+      document.querySelectorAll('.payment-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.payment-option').forEach(opt => {
+            opt.classList.remove('active');
+          });
+          this.classList.add('active');
+        });
+      });
+      
+      // Обновление итоговой суммы
+      function updateTotalPrice() {
+        let total = 0;
+        let itemCount = 0;
+        
+        document.querySelectorAll('.cart-item').forEach(item => {
+          const quantity = parseInt(item.querySelector('.quantity-value').textContent);
+          const priceText = item.querySelector('.item-price').textContent;
+          const price = parseInt(priceText.replace(/[^\d]/g, ''));
+          
+          total += price * quantity;
+          itemCount += quantity;
+        });
+        
+        // Обновляем количество товаров
+        const itemCountElement = document.querySelector('.summary-row:first-child span:first-child');
+        if (itemCountElement) {
+          itemCountElement.textContent = `${itemCount} ${getCorrectWordForm(itemCount, ['товар', 'товара', 'товаров'])}`;
+        }
+        
+        // Обновляем итоговую сумму
+        const totalElement = document.querySelector('.summary-total span:last-child');
+        if (totalElement) {
+          totalElement.textContent = `${total} ₽`;
+        }
+        
+        // Обновляем промежуточную сумму
+        const subtotalElement = document.querySelector('.summary-row:first-child span:last-child');
+        if (subtotalElement) {
+          subtotalElement.textContent = `${total} ₽`;
+        }
+      }
+      
+      // Функция для правильного склонения слов
+      function getCorrectWordForm(number, words) {
+        const cases = [2, 0, 1, 1, 1, 2];
+        return words[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+      }
+      
+      // Инициализация при загрузке
+      document.addEventListener('DOMContentLoaded', function() {
+        updateTotalPrice();
+      });
 
 
 
