@@ -586,19 +586,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const enterButton = document.querySelector('.enter_button');
     
     // Тогглер видимости пароля
-    const passwordControl = document.querySelector('.password_control');
-    if (passwordControl) {
-        passwordControl.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                this.textContent = 'Скрыть';
-            } else {
-                passwordInput.type = 'password';
-                this.textContent = 'Показать';
-            }
-        });
-    }
+  
     
     // Валидация логина (ровно 8 символов)
     function validateLogin() {
@@ -662,6 +650,7 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordError.style.display = 'none';
     });
 });
+
 
 
 
