@@ -1,21 +1,4 @@
-function clearStylesAndError() {
-    error.textContent = "";
-    input_login.classList.remove('invalid', 'valid');
-}
-function validateAndSubmit() {
-    clearStylesAndError();
-    const name = input_login.value.trim();
-    if (!name) {
-        error.textContent = "Введите имя!";
-        input_login.classList.add('invalid');
-        return;
-    }
-    if (name.length < 2 || name.lenght > 30) {
-        error.textContent = "";
-        input_login.classList.add('invalid');
-        return;
-    }
-}
+
 
 // button.addEventListener('click',validateAndSubmit)
 
@@ -30,136 +13,8 @@ function validateAndSubmit() {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Получаем элементы
-    const loginInput = document.getElementById('loginInput');
-    const passwordInput = document.getElementById('passwordInput');
-    const loginError = document.getElementById('loginError');
-    const passwordError = document.getElementById('passwordError');
-    const submitBtn = document.getElementById('submitBtn');
 
-    // Проверяем, что элементы существуют
-    if (!loginInput || !submitBtn) {
-        console.error('Элементы не найдены! Проверьте ID');
-        return;
-    }
-
-    console.log('Скрипт загружен, элементы найдены');
-
-    // Функция очистки ошибок
-    function clearErrors() {
-        loginError.textContent = '';
-        passwordError.textContent = '';
-        loginInput.classList.remove('invalid', 'valid');
-    }
-
-    // Валидация логина
-    function validateLogin() {
-        const login = loginInput.value.trim();
-
-        if (!login) {
-            loginError.textContent = 'Введите логин!';
-            loginInput.classList.add('invalid');
-            return false;
-        }
-
-        if (login.length < 3 || login.length > 20) {
-            loginError.textContent = 'Логин должен быть от 3 до 20 символов';
-            loginInput.classList.add('invalid');
-            return false;
-        }
-
-        loginInput.classList.remove('invalid');
-        loginInput.classList.add('valid');
-        return true;
-    }
-
-    // Валидация пароля
-    function validatePassword() {
-        const password = passwordInput.value;
-
-        if (!password) {
-            passwordError.textContent = 'Введите пароль!';
-            return false;
-        }
-
-        if (password.length < 6) {
-            passwordError.textContent = 'Пароль должен быть не менее 6 символов';
-            return false;
-        }
-
-        return true;
-    }
-
-    // Основная функция валидации
-    function validateForm() {
-        clearErrors();
-
-        const isLoginValid = validateLogin();
-        const isPasswordValid = validatePassword();
-
-        if (isLoginValid && isPasswordValid) {
-            // Все ок - можно отправлять форму
-            alert('Форма валидна! Отправляем данные...');
-            // Здесь будет отправка формы на сервер
-            // window.location.href = 'index_auth.html';
-            return true;
-        }
-
-        return false;
-    }
-
-    // Обработчик для кнопки
-    submitBtn.addEventListener('click', function (e) {
-        e.preventDefault(); // Предотвращаем переход по ссылке
-        console.log('Кнопка нажата');
-        validateForm();
-    });
-
-    // Валидация при вводе
-    loginInput.addEventListener('input', function () {
-        const value = this.value.trim();
-        if (value.length > 0) {
-            // Проверяем только если что-то введено
-            if (value.length >= 3 && value.length <= 20) {
-                this.classList.remove('invalid');
-                this.classList.add('valid');
-                loginError.textContent = '';
-            } else {
-                this.classList.remove('valid');
-                this.classList.add('invalid');
-            }
-        } else {
-            this.classList.remove('invalid', 'valid');
-            loginError.textContent = '';
-        }
-    });
-
-    // Валидация по нажатию Enter
-    loginInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            validateForm();
-        }
-    });
-
-    passwordInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            validateForm();
-        }
-    });
-
-    // Для отладки - проверяем, что обработчики установлены
-    console.log('Обработчики установлены');
-});
-
-
-
-
-
-
-
+   
 
 
 // Класс для управления корзиной
@@ -748,7 +603,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateLogin() {
         const value = loginInput.value.trim();
         
-        if (value.length !== 8) {
+        if (value.length >= 8) {
             loginInput.style.borderColor = '#ff4444';
             loginError.textContent = 'Логин должен содержать ровно 8 символов';
             loginError.style.display = 'block';
@@ -806,5 +661,6 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordError.style.display = 'none';
     });
 });
+
 
 
