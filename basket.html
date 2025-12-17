@@ -6,146 +6,106 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="web/css/style.css" />
+    <style>
+      /* Стили для выпадающего списка адресов */
+      .custom-dropdown {
+        position: relative;
+        width: 100%;
+      }
+      
+      .dropdown-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: white;
+      }
+      
+      .dropdown-input:focus {
+        outline: none;
+        border-color: #D4902B;
+      }
+      
+      .dropdown-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-top: 5px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: none;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      
+      .dropdown-list.show {
+        display: block;
+      }
+      
+      .dropdown-item {
+        padding: 12px 15px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        border-bottom: 1px solid #f5f5f5;
+      }
+      
+      .dropdown-item:last-child {
+        border-bottom: none;
+      }
+      
+      .dropdown-item:hover {
+        background-color: #f9f9f9;
+      }
+      
+      .dropdown-item.selected {
+        background-color: #FDE8C3;
+        font-weight: 600;
+      }
+      
+      .dropdown-arrow {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.3s;
+      }
+      
+      .dropdown-input.active + .dropdown-arrow {
+        transform: translateY(-50%) rotate(180deg);
+      }
+      
+      /* Обновленные стили для опции самовывоза */
+      .delivery-option .dropdown-input {
+        margin-top: 10px;
+      }
+      
+      .delivery-option.active .dropdown-input {
+        border-color: #D4902B;
+      }
+    </style>
   </head>
+  <body>
+    <!-- ... (остальной HTML код header и начало main остается без изменений) ... -->
 
-
-<body>
-
-
-    <header>
-      
-
-       <nav class="nav-main nav_auth">
-        <div class="nav-wrapper">
-            
-            <div class="nav-center">
-                <ul class="nav-links">
-                    <li><img class="logotype" src="web/img/1.svg" alt="логотип"/></li>
-                    <li><a href="index_auth.html" class="nav_link">Главная</a></li>
-                    <li><a href="menu_auth.html" class="nav_link">Меню</a></li>
-                </ul>
-            </div>
-            
-            
-            <div class="nav-right">
-                <div class="nav-icons">
-                    <a href="basket.html" class="nav-icon">
-                        <img src="web/img/bascet.svg" alt="корзина">
-                    </a>
-                    <a href="profile.html" class="nav-icon">
-                        <img src="web/img/profile.svg" alt="профиль">
-                    </a>
-                </div>
-                <button class="nav-toggle" aria-label="Открыть меню">
-                    <span class="hamburger"></span>
-                </button>
-            </div>
+    <div class="delivery-section">
+      <h4 class="section-title">Доставка</h4>
+      <div class="delivery-option active">
+        <i class="fas fa-truck delivery-icon"></i>
+        <div>
+          <div>Доставка курьером</div>
+          <input type="text" class="address-input" placeholder="Введите адрес доставки">
         </div>
-    </nav>
-    </header>
-    
-    <main>
-      <div class="name_basket">
-        <p class="basket_n">Корзина</p>
       </div>
-      
-      <div class="container">
-        <div class="row basket-container">
-          <div class="col-lg-8 basket-items">
-            <!-- Товар 1 -->
-            <div class="cart-item">
-              <img src="/web/img/imgCCC.png" alt="Капучино" class="item-image">
-              <div class="item-details">
-                <h3 class="item-title">Капучино Каштан-Шоколад M</h3>
-                <p class="item-description">Ароматный капучино с нотками каштана и шоколада</p>
-                <span class="item-size">300 мл</span>
-                <div class="item-controls">
-                  <div class="quantity-control">
-                    <button class="quantity-btn minus-btn">-</button>
-                    <span class="quantity-value">1</span>
-                    <button class="quantity-btn plus-btn">+</button>
-                  </div>
-                  <div class="price-control">
-                    <span class="item-price">250 ₽</span>
-                    <button class="item-remove"><i class="fas fa-trash-alt"></i> Удалить</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Товар 2 -->
-            <div class="cart-item">
-              <img src="/web/img/imgPSS.png" alt="Пышка" class="item-image">
-              <div class="item-details">
-                <h3 class="item-title">Пышка со сгущенкой</h3>
-                <p class="item-description">Свежая пышка с нежной сгущенкой внутри</p>
-                <div class="item-controls">
-                  <div class="quantity-control">
-                    <button class="quantity-btn minus-btn">-</button>
-                    <span class="quantity-value">2</span>
-                    <button class="quantity-btn plus-btn">+</button>
-                  </div>
-                  <div class="price-control">
-                    <span class="item-price">65 ₽</span>
-                    <button class="item-remove"><i class="fas fa-trash-alt"></i> Удалить</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Товар 3 -->
-            <div class="cart-item">
-              <img src="/web/img/imgPSP.png" alt="Пышка" class="item-image">
-              <div class="item-details">
-                <h3 class="item-title">Пышка с пудрой</h3>
-                <p class="item-description">Классическая пышка, посыпанная сахарной пудрой</p>
-                <div class="item-controls">
-                  <div class="quantity-control">
-                    <button class="quantity-btn minus-btn">-</button>
-                    <span class="quantity-value">1</span>
-                    <button class="quantity-btn plus-btn">+</button>
-                  </div>
-                  <div class="price-control">
-                    <span class="item-price">35 ₽</span>
-                    <button class="item-remove"><i class="fas fa-trash-alt"></i> Удалить</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 order-summary">
-            <h3 class="summary-title">Ваш заказ</h3>
-            
-            <div class="summary-row">
-              <span>3 товара</span>
-              <span>555 ₽</span>
-            </div>
-            
-            <div class="summary-row">
-              <span>Доставка:</span>
-              <span style="color: #28a745; font-weight: 600;">Бесплатно</span>
-            </div>
-            
-            <div class="summary-row summary-total">
-              <span>Итого:</span>
-              <span>555 ₽</span>
-            </div>
-            
-            <div class="delivery-section">
-              <h4 class="section-title">Доставка</h4>
-              <div class="delivery-option active">
-                <i class="fas fa-truck delivery-icon"></i>
-                <div>
-                  <div>Доставка курьером</div>
-                  <input type="text" class="address-input" placeholder="Введите адрес доставки">
-                </div>
-              </div>
-              <div class="delivery-option">
-                <i class="fas fa-store delivery-icon"></i>
-                <div>
-                  
-                    <div>Самовывоз</div>
+      <div class="delivery-option">
+        <i class="fas fa-store delivery-icon"></i>
+        <div>
+          <div>Самовывоз</div>
           <!-- Добавляем кастомный выпадающий список -->
           <div class="custom-dropdown">
             <input type="text" 
@@ -168,11 +128,12 @@
             </div>
           </div>
         </div>
-                  <input type="text" class="address-input" placeholder="Выберите адрес самовывоза" disabled>
-                </div>
-              
-              </div>
-            </div>
+      </div>
+    </div>
+
+   
+
+    
             
             <div class="payment-section">
               <h4 class="section-title">Способ оплаты</h4>
@@ -246,7 +207,82 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     
-   
+   <script>
+      // ... (существующий JavaScript код) ...
+
+      // Функционал для выпадающего списка адресов
+      document.addEventListener('DOMContentLoaded', function() {
+        const pickupAddressInput = document.getElementById('pickupAddress');
+        const addressList = document.getElementById('addressList');
+        const dropdownItems = addressList.querySelectorAll('.dropdown-item');
+        
+        // Показ/скрытие списка адресов
+        pickupAddressInput.addEventListener('click', function(e) {
+          e.stopPropagation();
+          addressList.classList.toggle('show');
+          this.classList.toggle('active');
+        });
+        
+        // Выбор адреса из списка
+        dropdownItems.forEach(item => {
+          item.addEventListener('click', function() {
+            const selectedAddress = this.getAttribute('data-value');
+            
+            // Устанавливаем выбранный адрес в поле
+            pickupAddressInput.value = selectedAddress;
+            
+            // Показываем выбранный элемент
+            dropdownItems.forEach(i => i.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            // Скрываем список
+            addressList.classList.remove('show');
+            pickupAddressInput.classList.remove('active');
+            
+            // Убеждаемся, что адрес сохранен (для тестирования)
+            console.log('Выбран адрес самовывоза:', selectedAddress);
+          });
+        });
+        
+        // Закрытие списка при клике вне его
+        document.addEventListener('click', function(e) {
+          if (!pickupAddressInput.contains(e.target) && !addressList.contains(e.target)) {
+            addressList.classList.remove('show');
+            pickupAddressInput.classList.remove('active');
+          }
+        });
+        
+        // Закрытие списка при нажатии Escape
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && addressList.classList.contains('show')) {
+            addressList.classList.remove('show');
+            pickupAddressInput.classList.remove('active');
+          }
+        });
+      });
+      
+      // Обновленный код для выбора способа доставки
+      document.querySelectorAll('.delivery-option').forEach(option => {
+        option.addEventListener('click', function(e) {
+          // Не переключаем, если кликнули на поле ввода
+          if (e.target.classList.contains('dropdown-input') || 
+              e.target.classList.contains('address-input')) {
+            return;
+          }
+          
+          document.querySelectorAll('.delivery-option').forEach(opt => {
+            opt.classList.remove('active');
+            const input = opt.querySelector('input');
+            if (input) input.disabled = true;
+          });
+          
+          this.classList.add('active');
+          const inputs = this.querySelectorAll('input');
+          inputs.forEach(input => input.disabled = false);
+        });
+      });
+    </script>
+  
     <script src="web/js/java_script.js"></script>
   <script>
       // Функционал изменения количества товаров
@@ -351,5 +387,6 @@
   </body>
 
 </html>
+
 
 
