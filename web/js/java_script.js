@@ -573,28 +573,15 @@ document.querySelectorAll('.quantity-btn').forEach(button => {
       
       // Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', function() {
-    const loginInput = document.getElementById('loginInput');
+    
     const passwordInput = document.getElementById('passwordInput');
-    const loginError = document.getElementById('loginError');
+    
     const passwordError = document.getElementById('passwordError');
     const enterButton = document.querySelector('.enter_button');
     
     // Тогглер видимости пароля
-    const passwordControl = document.querySelector('.password_control');
-    if (passwordControl) {
-        passwordControl.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                this.textContent = 'Скрыть';
-            } else {
-                passwordInput.type = 'password';
-                this.textContent = 'Показать';
-            }
-        });
-    }
     
-
+       
     
     // Валидация пароля (минимум 6 символов)
     function validatePassword() {
@@ -614,17 +601,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Валидация при вводе
-    loginInput.addEventListener('blur', validateLogin);
+    
     passwordInput.addEventListener('blur', validatePassword);
     
     // Валидация при отправке
     enterButton.addEventListener('click', function(e) {
         e.preventDefault();
         
-        const isLoginValid = validateLogin();
+        
         const isPasswordValid = validatePassword();
         
-        if (isLoginValid && isPasswordValid) {
+        if ( isPasswordValid) {
             // Если всё ок - переходим на главную
             window.location.href = 'index_auth.html';
         }
@@ -641,6 +628,7 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordError.style.display = 'none';
     });
 });
+
 
 
 
